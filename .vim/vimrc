@@ -43,6 +43,34 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>v :vs<CR>
 nmap <Leader><Leader> V
 
+" elixir test runner commands
+let g:extest_exunit_run_test_cmd = "elixir '%f'"
+let g:extest_exunit_run_file_cmd = "elixir '%f'"
+map <leader>T :ExTestRunFile<CR>
+map <leader>t :ExTestRunTest<CR>
+map <leader>lt :ExTestRunLast<CR>
+
+" vim-go maps
+au FileType go nmap <leader>r <Plug>(go-run)
+"au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+"YouCompleteMe settings:
+"autoclose scratch window after completion
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 
 " Treate eco files as html for autoclose
@@ -71,7 +99,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'AndrewRadev/vim-eco'
 Plugin 'vim-scripts/HTML-AutoCloseTag'
-" Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 " Plugin 'ekalinin/Dockerfile.vim'
 " Plugin 'matthewsimo/angular-vim-snippets'
@@ -79,9 +107,12 @@ Plugin 'vim-scripts/HTML-AutoCloseTag'
 " Plugin 'wting/rust.vim'
 Plugin 'raichoo/haskell-vim'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'BjRo/vim-extest'
 Plugin 'Valloric/YouCompleteMe'
 " Optional:
 " Plugin 'honza/vim-snippets'
+" Ember Stuff
+Plugin 'mustache/vim-mustache-handlebars'
 call vundle#end()
 
 syntax enable
