@@ -92,3 +92,5 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=$HOME/bin:./bin:$PATH
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export GOPATH=$HOME/code/go
+export PATH=$PATH:$GOPATH/bin
