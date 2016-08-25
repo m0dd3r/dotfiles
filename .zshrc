@@ -5,6 +5,20 @@ alias xswipe='perl ~/code/xSwipe/xSwipe.pl &'
 alias gs=gst
 function c() { cd ~/code/$1; }
 
+# Support for bash
+PROMPT_COMMAND='prompt'
+
+# Mirrored support for zsh. See: https://superuser.com/questions/735660/whats-the-zsh-equivalent-of-bashs-prompt-command/735969#735969 
+precmd() { eval "$PROMPT_COMMAND" }
+
+function prompt()
+{
+  if [ "$PWD" != "$MYOLDPWD" ]; then
+    MYOLDPWD="$PWD"
+    test -e .venv && workon `cat .venv`
+  fi
+}
+
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -53,21 +67,22 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(rails ruby bundler git archlinux rvm)
+plugins=(rails ruby bundler git archlinux rbenv)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+source ~/.gvm/scripts/gvm
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -88,9 +103,20 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Load RVM, if you are using it
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-export PATH=$HOME/bin:./bin:$PATH
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export GOPATH=$HOME/code/go
+#export PATH=$HOME/bin:./bin:$PATH
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#export PATH="$HOME/.rbenv/bin:$PATH" # Add rbenv to PATH for scripting
+#export GOPATH=$HOME/code/go
+export GO15VENDOREXPERIMENT=1
 export PATH=$PATH:$GOPATH/bin
+#export PATH=$PATH:/home/jrankin/code/depot_tools
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/code/python
+source /usr/bin/virtualenvwrapper.sh
+
+eval "$(rbenv init -)"
+
+#[[ -s "/home/jrankin/.gvm/scripts/gvm" ]] && source "/home/jrankin/.gvm/scripts/gvm"
