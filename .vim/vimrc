@@ -5,6 +5,8 @@ else
   let s:editor_root=expand("~/.vim")
 endif
 
+com! FormatJSON %!python -m json.tool
+
 set termguicolors
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
