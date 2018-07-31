@@ -1,0 +1,17 @@
+#!/bin/zsh
+# This hook is sourced after every virtualenv is activated.
+
+# Remove virtual env from start of PS1 as it's in RPROMPT instead
+PS1="$_OLD_VIRTUAL_PS1"
+_OLD_RPROMPT="$RPROMPT"
+RPROMPT="%{${fg_bold[white]}%}(env: %{${fg[green]}%}`basename \"$VIRTUAL_ENV\"`%{${fg_bold[white]}%})%{${reset_color}%} $RPROMPT"
+
+PROJECT_DIR="$PROJECT_HOME/$(basename $VIRTUAL_ENV)"
+if [ -d $PROJECT_DIR ]; then
+    # If we aren't already within the project dir, cd into it
+    if [[ ! `pwd` == "$PROJECT_DIR*" ]]; then
+        export PRE_VENV_ACTIVATE_DIR=`pwd`
+        cd "$PROJECT_DIR"
+    fi
+fi
+unset PROJECT_DIR
