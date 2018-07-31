@@ -119,6 +119,7 @@ export PATH=$PATH:$GOPATH/bin
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(rbenv init -)"
@@ -126,3 +127,5 @@ eval "$(rbenv init -)"
 #[[ -s "/home/jrankin/.gvm/scripts/gvm" ]] && source "/home/jrankin/.gvm/scripts/gvm"
 eval "$(pyenv virtualenv-init -)"
 source /usr/share/nvm/init-nvm.sh
+
+alias config='/usr/bin/git --git-dir=/home/jrankin/.cfg/ --work-tree=/home/jrankin'

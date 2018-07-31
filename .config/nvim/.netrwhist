@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/jrankin/.rbenv/versions/2.3.6/gemsets/bb2/gems/gmail_xoauth-0.4.1/lib'
+let g:netrw_dirhist_2='/home/jrankin/.rbenv/versions/2.3.6/gemsets/bb2/gems/gmail_xoauth-0.4.1/lib/gmail_xoauth'
+let g:netrw_dirhist_3='/home/jrankin/.docker'

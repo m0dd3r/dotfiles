@@ -3,10 +3,11 @@
 # .make.sh
 # This script creates symlinks from the home directory to speficied files in the dotfiles directory
 ###########################################################################################################
+set -x
 
-dir=~/dotfiles                      # dotfiles directory
-olddir=~/dotfiles_old               # backup directory for old dotfiles
-files="vim zshrc tmux.conf virtualenvs/postactivate virtualenvs/postdeactivate"         # List of files/directories to link
+dir=$HOME/dotfiles                      # dotfiles directory
+olddir=$HOME/dotfiles_old               # backup directory for old dotfiles
+files="vim config/nvim zshrc tmux.conf virtualenvs/postactivate virtualenvs/postdeactivate"         # List of files/directories to link
 
 echo "Creating backup directory $olddir"
 mkdir -p $olddir
@@ -18,8 +19,8 @@ echo "...done"
 
 for file in $files; do
   echo "Moving existing file, $file, to $olddir"
-  mv ~/.$file $olddir
+  mv $HOME/.$file $olddir
   echo "Creating symlink to $file in $dir"
-  ln -s $dir/.$file ~/.$file
+  ln -s $dir/.$file $HOME/.$file
 done
 

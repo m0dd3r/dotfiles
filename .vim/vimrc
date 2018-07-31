@@ -114,7 +114,7 @@ nmap <F8> :TagbarToggle<CR>
 
 "YouCompleteMe settings:
 "autoclose scratch window after completion
-"let g:ycm_path_to_python_interpreter = '/home/jrankin/.pyenv/shims/python'
+"let g:ycm_path_to_python_interpreter = '~/.pyenv/shims/python'
 "let g:ycm_autoclose_preview_window_after_completion = 1
 "let g:ycm_autoclose_preview_window_after_insertion = 1
 
