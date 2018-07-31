@@ -67,13 +67,6 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>v :vs<CR>
 nmap <Leader><Leader> V
 
-" elixir test runner commands
-" let g:extest_exunit_run_test_cmd = "elixir '%f'"
-" let g:extest_exunit_run_file_cmd = "elixir '%f'"
-" map <leader>T :ExTestRunFile<CR>
-" map <leader>t :ExTestRunTest<CR>
-" map <leader>lt :ExTestRunLast<CR>
-
 " vim-go maps
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>m <Plug>(go-build)
@@ -84,6 +77,10 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 
+" haskell hdevtools maps
+au FileType haskell nnoremap <buffer> <leader>i :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -93,23 +90,33 @@ let g:go_fmt_command = "goimports"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
+let g:go_snippet_engine = "neosnippet"
+
 
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   inoremap <expr><C-l>     deoplete#complete_common_string()
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 else
   let g:neocomplete#enable_at_startup = 1
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   inoremap <expr><C-l>     neocomplete#complete_common_string()
 endif
 
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+nmap <F8> :TagbarToggle<CR>
 
 "YouCompleteMe settings:
 "autoclose scratch window after completion
-let g:ycm_path_to_python_interpreter = '/home/jrankin/.pyenv/shims/python'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_path_to_python_interpreter = '/home/jrankin/.pyenv/shims/python'
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
 
 
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
@@ -120,10 +127,10 @@ autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 au Filetype eco so ~/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim
 
 " Haskell stuff from: http://www.stephendiehl.com/posts/vim_2016.html
-map <silent> tw :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
+ map <silent> tw :GhcModTypeInsert<CR>
+ map <silent> ts :GhcModSplitFunCase<CR>
+ map <silent> tq :GhcModType<CR>
+ map <silent> te :GhcModTypeClear<CR>
 
 
 "python with virtualenv support
@@ -141,15 +148,13 @@ let python_highlight_all=1
 " Vim-plug
 call plug#begin(s:editor_root . '/bundle')
 
-Plug 'gmarik/Vundle.vim'
-
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 
 Plug 'vim-scripts/matchit.zip'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 " Plug "MarcWeber/vim-addon-mw-utils"
 " Plug "tomtom/tlib_vim"
 " Plug "garbas/vim-snipmate"
@@ -157,44 +162,43 @@ Plug 'scrooloose/syntastic'
 Plug 'kchmck/vim-coffee-script'
 Plug 'AndrewRadev/vim-eco'
 Plug 'vim-scripts/HTML-AutoCloseTag'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go'}
 
-" Plug 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
 " Plug 'matthewsimo/angular-vim-snippets'
 
-Plug 'wting/rust.vim'
-Plug 'racer-rust/vim-racer'
+Plug 'wting/rust.vim', {'for': 'rust'}
+Plug 'racer-rust/vim-racer', {'for': 'rust'}
 
-Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-hindent'
-Plug 'eagletmt/ghcmod-vim'
-" Plug 'elixir-lang/vim-elixir'
-" Plug 'BjRo/vim-extest'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
+Plug 'alx741/vim-hindent', {'for': 'haskell'}
+Plug 'bitc/vim-hdevtools', {'for': 'haskell'}
+Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
+"Plug 'Valloric/YouCompleteMe'
 Plug 'Shougo/vimproc.vim'
-"Plug 'dart-lang/dart-vim-plugin'
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
 else
   Plug 'Shougo/neocomplete.vim'
 endif
-" Python
-"Plug 'vim-scripts/indentpython.vim'
-Plug 'nvie/vim-flake8'
 
-" Optional:
-" Plug 'honza/vim-snippets'
-" Ember Stuff
-" Plug 'mustache/vim-mustache-handlebars'
-"
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
+" Python
+Plug 'nvie/vim-flake8', {'for': 'python'}
+
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
 Plug 'neomake/neomake'
+Plug 'majutsushi/tagbar'
 
-Plug 'elmcast/elm-vim'
+"Plug 'FrigoEU/psc-ide-vim/', {'for': 'purescript'}
+"Plug 'purescript-contrib/purescript-vim', {'for': 'purescript'}
 
 call plug#end()
 
