@@ -1,0 +1,1 @@
+/home/jrankin/.vim/vimrc
