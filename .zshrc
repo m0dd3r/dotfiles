@@ -67,7 +67,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(rails ruby bundler git archlinux rbenv)
+plugins=(bundler git archlinux)
 
 # User configuration
 
@@ -75,7 +75,7 @@ export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-source ~/.gvm/scripts/gvm
+#source ~/.gvm/scripts/gvm
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -117,15 +117,17 @@ export PATH=$PATH:$GOPATH/bin
 #export PROJECT_HOME=$HOME/code/python
 #source /usr/bin/virtualenvwrapper.sh
 
-export PYENV_ROOT="$HOME/.pyenv"
+#export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-eval "$(pyenv init -)"
-eval "$(rbenv init -)"
+#eval "$(pyenv init -)" 
+#eval "$(rbenv init -)"
 
 #[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
-eval "$(pyenv virtualenv-init -)"
-source /usr/share/nvm/init-nvm.sh
+#eval "$(pyenv virtualenv-init -)"
+#source /usr/share/nvm/init-nvm.sh
 
-alias config='/usr/bin/git --git-dir=~/.cfg/ --work-tree=~/'
+#alias config='/usr/bin/git --git-dir=~/.cfg/ --work-tree=~/'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
